@@ -11,12 +11,12 @@ while(1):
 	_,img=cap.read()
 	im=img
 	img=img[150:450,80:500] 
-	im=cv2.rectangle(im,(500,180),(180,350),(0,255,0),2)
+	im=cv2.rectangle(im,(500,180),(180,350),(0,255,0),2) 
 	
-	lower=np.array([255,223,196]) 
-	upper=np.array([255,223,196])
+	lower=np.array([0,20,150]) #deri renginin renk aralıkları
+	upper=np.array([20,255,255])
 	
-	converted=cv2.cvtColor(img,cv2.COLOR_BGR2HSV) 
+	converted=cv2.cvtColor(img,cv2.COLOR_BGR2HSV) #BGR to HSV
 	skinMask=cv2.inRange(converted,lower,upper)
 	kernel = cv2.getStructuringElement(cv2.MORPH_ELLIPSE, (7, 7))
 	skinMask=cv2.morphologyEx(skinMask,cv2.MORPH_CLOSE,kernel)
@@ -31,7 +31,7 @@ while(1):
 		for ind,ct in enumerate(contours):
 			M=cv2.moments(contours[ind])
 			area=int(M["m00"])
-			if area in range(6000,13000):
+			if area in range(6000,13000): #diğer bölgeleri atıyoruz
 				m1=cv2.moments(contours[0])
 				m2=cv2.moments(contours[1])
 				x1=int(m1["m10"]/m1["m00"])
@@ -49,7 +49,7 @@ while(1):
 				distance=math.sqrt(((x2-x1)**2) + ((y2-y1)**2))
 				distance=round((distance/300)*100,2)
 			
-				if(distance>100):
+				if(distance>100): #limitler
 					distance=100
 				if slope>100:
 					slope=100
@@ -57,24 +57,24 @@ while(1):
 					slope=-100
 					
 				cv2.line(im,(x1,y1),(x2,y2),(100,255,0),5)
-				cv2.putText(im,"Turning:"+Dir+str(slope)+"deg",(50,50),cv2.FONT_HERSHEY_SIMPLEX,0.5,(255,255,255),2)
-				cv2.putText(im,"Acceleration:"+(str(distance)),(50,150),cv2.FONT_HERSHEY_SIMPLEX,0.5,(0,255,0),2)
+				cv2.putText(im,"Dönüş:"+Dir+str(slope)+"deg",(50,50),cv2.FONT_ITALIC,0.5,(255,255,255),2)
+				cv2.putText(im,"Hızlanma:"+(str(distance)),(50,150),cv2.FONT_ITALIC,0.5,(0,255,0),2)
 				xAxis(slope)
 				yAxis(distance)
 				
 			else:
 				if area>13000 and len(contours)==1:
-					cv2.putText(im,"BRAKE",(50,50),cv2.FONT_HERSHEY_SIMPLEX,1,(0,0,255),4)
+					cv2.putText(im,"FREN",(50,50),cv2.FONT_ITALIC,1,(0,0,255),4)
 					Brake()
 				
-	except ValueError:
+	except ValueError: #eller dışarıdaysa
 		reCentre()
 
 	except:
 		pass
 
-	cv2.imshow('main cam',im)
-	cv2.imshow('segment',skin)
+	cv2.imshow('görüntü',im)
+	cv2.imshow('cihazıngördüğü',skin)
 	if cv2.waitKey(1) & 0xFF == ord('q'):
 		break
 
