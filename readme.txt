@@ -8,4 +8,5 @@ Yapmanız gereken şeyler:
 6-vjoy indirmeniz gerekecektir.
 7-vjoy:http://vjoystick.sourceforge.net/site/index.php/download-a-install/download buradan indirebilirsiniz.
 8-Kütüphanelerden en sıkıntılı olanı pvyjoy kütüphanesi onu indirmek için vereceğim linke bakın     ==>https://github.com/tidzo/pyvjoy (eğer işe yaramazsa bana ulaşabilirsiniz.)
-9-
+9-Kodu çalıştırın. 
+10-Problem çıkarsa lütfen bildirin.
