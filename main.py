@@ -9,9 +9,9 @@ Dir="-->"
 
 while(1):
 	_,img=cap.read()
-	im=img
+	imt=img
 	img=img[150:450,80:500] 
-	im=cv2.rectangle(im,(500,180),(180,350),(0,255,0),2) 
+	imt=cv2.rectangle(imt,(500,180),(180,350),(0,255,0),2) 
 	
 	lower=np.array([0,20,150]) #deri renginin renk aralıkları
 	upper=np.array([20,255,255])
@@ -56,15 +56,15 @@ while(1):
 				elif slope< -100:
 					slope=-100
 					
-				cv2.line(im,(x1,y1),(x2,y2),(100,255,0),5)
-				cv2.putText(im,"Dönüş:"+Dir+str(slope)+"deg",(50,50),cv2.FONT_ITALIC,0.5,(255,255,255),2)
-				cv2.putText(im,"Hızlanma:"+(str(distance)),(50,150),cv2.FONT_ITALIC,0.5,(0,255,0),2)
+				cv2.line(imt,(x1,y1),(x2,y2),(100,255,0),5)
+				cv2.putText(imt,"Dönüş:"+Dir+str(slope)+"deg",(50,50),cv2.FONT_ITALIC,0.5,(255,255,255),2)
+				cv2.putText(imt,"Hızlanma:"+(str(distance)),(50,150),cv2.FONT_ITALIC,0.5,(0,255,0),2)
 				xAxis(slope)
 				yAxis(distance)
 				
 			else:
 				if area>13000 and len(contours)==1:
-					cv2.putText(im,"FREN",(50,50),cv2.FONT_ITALIC,1,(0,0,255),4)
+					cv2.putText(imt,"FREN",(50,50),cv2.FONT_ITALIC,1,(0,0,255),4)
 					Brake()
 				
 	except ValueError: #eller dışarıdaysa
@@ -73,7 +73,7 @@ while(1):
 	except:
 		pass
 
-	cv2.imshow('görüntü',im)
+	cv2.imshow('görüntü',imt)
 	cv2.imshow('cihazıngördüğü',skin)
 	if cv2.waitKey(1) & 0xFF == ord('q'):
 		break
