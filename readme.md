@@ -1,6 +1,6 @@
 # Driving-Without-Keyboard
 Yapmanız gereken şeyler:
-1-Kodu çalıştırın.
+Kodu çalıştırın.
 2-Gerekli kütüphaneleri indirin.
 3-UCR(Universal Control Remapper) indirmeniz gerekecektir.
 4-UCR:http://evilc.com/files/ahk/ucr/UCR.zip 
